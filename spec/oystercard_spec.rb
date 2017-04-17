@@ -22,4 +22,22 @@ describe Oystercard do
       expect(subject.balance).to eq 17.5
     end
   end
+  describe '#in_journey?' do
+    it 'returns true or false whether a card is in use or not' do
+      expect(subject.in_journey?).to be(true).or be(false)
+    end
+  end
+  describe '#touch_in' do
+    it 'changes the status of the oystercard to be in use' do
+      subject.touch_in
+      expect(subject.in_use).to be true
+    end
+  end
+  describe '#touch_out' do
+    it 'changes the status of the oystercard to not in use' do
+      subject.touch_in
+      subject.touch_out
+      expect(subject.in_use).to be false
+    end
+  end
 end

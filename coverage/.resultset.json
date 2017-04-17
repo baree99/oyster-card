@@ -26,6 +26,24 @@
         1,
         null,
         null,
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
         null
       ],
       "/Users/peterbarcsak/Projects/oyster_card/lib/oystercard.rb": [
@@ -36,7 +54,8 @@
         1,
         null,
         1,
-        4,
+        7,
+        7,
         null,
         null,
         1,
@@ -47,9 +66,21 @@
         1,
         1,
         null,
+        null,
+        1,
+        2,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
         null
       ]
     },
-    "timestamp": 1492445994
+    "timestamp": 1492448591
   }
 }
