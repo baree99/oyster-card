@@ -10,7 +10,6 @@ describe Oystercard do
   end
 
   describe '#top_up' do
-
     it 'adds money to your balance' do
       expect { subject.top_up(10) }.to change { subject.balance }.by +10
     end
@@ -21,7 +20,6 @@ describe Oystercard do
   end
 
   describe '#in_journey?' do
-
     it 'returns true when a card is touched in' do
       subject.top_up(described_class::MAXIMUM_BALANCE)
       subject.touch_in(entry_station)
@@ -34,7 +32,6 @@ describe Oystercard do
   end
 
   describe '#touch_in' do
-
     it 'changes the status of the oystercard to be in journey' do
       subject.top_up(described_class::MAXIMUM_BALANCE)
       subject.touch_in(entry_station)
@@ -74,7 +71,7 @@ describe Oystercard do
       expect(subject.journey).to include ({entry_station: entry_station, exit_station: exit_station})
     end
 
-    it "deducts the #{described_class::MINIMUM_FARE} from balance" do
+    it "deducts £#{described_class::MINIMUM_FARE} from balance" do
       expect { subject.touch_out(exit_station) }.to change { subject.balance }.by -described_class::MINIMUM_FARE
     end
   end

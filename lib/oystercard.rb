@@ -1,5 +1,6 @@
-class Oystercard
+require_relative 'station'
 
+class Oystercard
   DEFAULT_BALANCE = 0
   MINIMUM_FARE = 1
   MAXIMUM_BALANCE = 90
@@ -35,11 +36,11 @@ class Oystercard
 
 private
 
-    def trip
-      { entry_station: @entry_station, exit_station: @exit_station }
-    end
+  def trip
+    { entry_station: @entry_station, exit_station: @exit_station }
+  end
 
-    def deduct(value)
-      @balance -= value
-    end
+  def deduct(value)
+    @balance -= value
+  end
 end
