@@ -38,14 +38,14 @@ describe Oystercard do
       expect(subject).to be_in_journey
     end
 
-    it "stores the name of the entry entry_station" do
-      subject.top_up(described_class::MAXIMUM_BALANCE)
-      subject.touch_in(entry_station)
-      expect(subject.entry_station).to eq entry_station
-    end
-
     it "raise an error when insufficient funds" do
       expect { subject.touch_in(entry_station) }.to raise_error "Insufficient funds"
+    end
+
+    it 'deducts £6 when not touched out' do
+      subject.top_up(described_class::MAXIMUM_BALANCE)
+      subject.touch_in(entry_station)
+      expect { subject.touch_in(entry_station) }.to change { subject.balance }.by -6
     end
   end
 
@@ -59,12 +59,6 @@ describe Oystercard do
       expect(subject).to_not be_in_journey
     end
 
-    it "stores the name of the exit station" do
-      subject.touch_in(entry_station)
-      subject.touch_out(exit_station)
-      expect(subject.exit_station).to eq exit_station
-    end
-
     it 'keeps track of the journeys made' do
       subject.touch_in(entry_station)
       subject.touch_out(exit_station)
@@ -72,7 +66,11 @@ describe Oystercard do
     end
 
     it "deducts £#{described_class::MINIMUM_FARE} from balance" do
+      subject.touch_in(entry_station)
       expect { subject.touch_out(exit_station) }.to change { subject.balance }.by -described_class::MINIMUM_FARE
+    end
+    it "deducts £6 from balance when not not touched in or out" do
+      expect { subject.touch_out(exit_station) }.to change { subject.balance }.by -6
     end
   end
 end

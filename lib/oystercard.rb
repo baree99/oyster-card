@@ -1,4 +1,5 @@
 require_relative 'station'
+require_relative 'journey'
 
 class Oystercard
   DEFAULT_BALANCE = 0
@@ -9,6 +10,7 @@ class Oystercard
 
   def initialize
     @balance = DEFAULT_BALANCE
+    @trip = Journey.new
     @journey = []
   end
 
@@ -18,27 +20,23 @@ class Oystercard
   end
 
   def touch_in(station)
-    @exit_station = nil
-    @entry_station = station
+    deduct(@trip.fare) if in_journey?
     fail "Insufficient funds" if @balance < MINIMUM_FARE
+    @trip = Journey.new
+    @trip.start(station)
   end
 
   def touch_out(station)
-    @exit_station = station
-    @journey << trip
-    @entry_station = nil
-    deduct(MINIMUM_FARE)
+    @trip.finish(station)
+    deduct(@trip.fare)
+    @journey << @trip.last_journey
   end
 
   def in_journey?
-    !!@entry_station
+    !!@trip.entry_station
   end
 
 private
-
-  def trip
-    { entry_station: @entry_station, exit_station: @exit_station }
-  end
 
   def deduct(value)
     @balance -= value
