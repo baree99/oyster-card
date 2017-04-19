@@ -1,17 +1,14 @@
 require 'station'
 
 describe Station do
+ let(:station) { described_class.new("Aldgate", 1) }
 
-let(:station) { described_class.new(:aldgate, 3) }
-
-describe 'Initialization' do
-
-  it 'should have correct name' do
-    expect(station.name).to eq :aldgate
+  it 'records a station\'s zone' do
+    expect(station.zone).to eq 1
   end
 
-  it 'should have a corrct zone' do
-    expect(station.zone).to eq 3
+  it 'records a station\'s name' do
+    expect(station.name).to eq "Aldgate"
   end
- end
+
 end
