@@ -2,7 +2,7 @@ require_relative 'oystercard'
 
 class Journey
 
-  MIN_FARE = 1
+  FARE = 1
   PEN_FARE = 6
 
   attr_reader :entry_station, :exit_station
@@ -13,7 +13,7 @@ class Journey
 
   def fare
     return PEN_FARE if !@entry_station || !@exit_station
-    MIN_FARE
+    FARE + ((@entry_station.zone - @exit_station.zone).abs * FARE)
   end
 
   def finish(station)
