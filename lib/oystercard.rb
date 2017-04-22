@@ -24,8 +24,7 @@ class Oystercard
 
   def touch_out(station)
     @journeylog.start(nil) if !in_journey?
-    @journeylog.finish(station)
-    deduct(@journeylog.current_journey.fare)
+    deduct(@journeylog.finish(station))
     @journeylog.record_journey
   end
 

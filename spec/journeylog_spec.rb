@@ -1,7 +1,7 @@
 require 'journeylog'
 
 describe JourneyLog do
-  let(:station) { double :station }
+  let(:station) { Station.new(:station, 1)}
   describe '#start' do
     it 'starts a journey' do
       subject.start(station)
